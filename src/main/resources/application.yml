@@ -1,0 +1,63 @@
+server:
+    port: 8080
+    context-path: #/liuzh/
+
+logging:
+    level:
+        tk.mybatis: TRACE
+
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://127.0.0.1:3306/test
+        username: root
+        password: root
+        type: org.apache.commons.dbcp.BasicDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: .ftl
+    freemarker:
+        cache: false
+        request-context-attribute: request
+    kafka:
+        producer:
+            bootstrap-servers: 192.168.191.128:9092,192.168.191.131:9092,192.168.191.130:9092
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+        consumer:
+            bootstrap-servers: 192.168.191.131:9092
+            group-id: test-group
+            enable-auto-commit: false
+            auto-commit-interval: 100
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer    
+        
+mybatis:
+    type-aliases-package: com.zlf.model
+    mapper-locations: classpath:mapper/*.xml
+    
+mapper:
+    mappers:com.zlf.mapper.*
+    
+    
+
+    
+    
+
+
+
+
+
